@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "416182240997",
+    "project_id": "nightingale-flutter-quizapp",
+    "storage_bucket": "nightingale-flutter-quizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416182240997:android:ff23c39ceb95b5f016760c",
+        "android_client_info": {
+          "package_name": "com.example.nightingale_flutter_quizapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416182240997-fa9pimvp6h2bv968s2nophp6imsbrtn4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANC8SeCu8wl62EMYQSUSxR32Hdp6njkR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416182240997-fa9pimvp6h2bv968s2nophp6imsbrtn4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
