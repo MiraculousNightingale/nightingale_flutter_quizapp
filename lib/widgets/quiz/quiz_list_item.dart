@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
+import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
 import 'package:nightingale_flutter_quizapp/widgets/text/text_h_2.dart';
 
 class QuizListItem extends StatelessWidget {
@@ -37,7 +38,14 @@ class QuizListItem extends StatelessWidget {
               color: Colors.white,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  QuestionsScreen.routeName,
+                  arguments: {
+                    'quiz': quiz,
+                  },
+                );
+              },
               icon: const Icon(
                 Icons.play_arrow,
               ),

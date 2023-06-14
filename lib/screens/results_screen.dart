@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nightingale_flutter_quizapp/models/quiz.dart';
 import 'package:nightingale_flutter_quizapp/widgets/common/gradient_container.dart';
-import 'package:nightingale_flutter_quizapp/questions.dart';
-import 'package:nightingale_flutter_quizapp/widgets/text/text_h_1.dart';
+import 'package:nightingale_flutter_quizapp/widgets/text/text_h_2.dart';
 
 class ResultsScreen extends StatelessWidget {
   static const routeName = '/results';
 
   const ResultsScreen({super.key});
 
-  List<Widget> _buildResults(List<String> selectedAnswers) {
+  List<Widget> _buildResults(Quiz quiz, List<String> selectedAnswers) {
     final List<Widget> results = [];
     for (var i = 0; i < selectedAnswers.length; i++) {
+      final question = quiz.questions[i];
       final answer = selectedAnswers[i];
-      final correctAnswer = null;
+      final correctAnswer = question.answers.first;
       final isCorrect = answer == correctAnswer;
       results.add(
         Container(
@@ -55,7 +56,7 @@ class ResultsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'null',
+                      question.text,
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                         fontSize: 16,
@@ -93,11 +94,13 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedAnswers =
-        ModalRoute.of(context)!.settings.arguments as List<String>;
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final quiz = routeArgs['quiz'] as Quiz;
+    final selectedAnswers = routeArgs['selectedAnswers'] as List<String>;
     var correctAnswers = 0;
     selectedAnswers.asMap().forEach((key, value) {
-      if (value == 0) correctAnswers++;
+      if (value == quiz.questions[key].answers.first) correctAnswers++;
     });
     return Scaffold(
       body: GradientContainer(
@@ -106,15 +109,15 @@ class ResultsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: TextH1(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+                child: TextH2(
                   'You answered $correctAnswers out of ${selectedAnswers.length} questions correctly',
                 ),
               ),
-              // ..._buildResults(selectedAnswers),
               Expanded(
                 child: ListView(
-                  children: _buildResults(selectedAnswers),
+                  children: _buildResults(quiz, selectedAnswers),
                 ),
               ),
               Padding(
