@@ -3,7 +3,6 @@ import 'package:nightingale_flutter_quizapp/models/quiz.dart';
 import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
 import 'package:nightingale_flutter_quizapp/widgets/common/gradient_container.dart';
 import 'package:nightingale_flutter_quizapp/widgets/quiz/quiz_list_item.dart';
-import 'package:nightingale_flutter_quizapp/widgets/text/text_h_2.dart';
 import 'package:provider/provider.dart';
 
 class QuizListScreen extends StatelessWidget {
@@ -21,7 +20,6 @@ class QuizListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final quizzes = Provider.of<Quizzes>(context).fetchAndSetQuizzes();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz List'),
@@ -38,22 +36,23 @@ class QuizListScreen extends StatelessWidget {
       ),
       body: GradientContainer(
         child: FutureBuilder(
+          future: _loadQuizzes(context),
           builder: (context, snapshot) => snapshot.connectionState ==
                   ConnectionState.waiting
-              ? const CircularProgressIndicator()
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
               : RefreshIndicator(
                   onRefresh: () => _loadQuizzes(context),
                   child: Consumer<Quizzes>(
                     builder: (context, value, child) => Column(
                       children: [
                         Expanded(
-                          child: Padding(
+                          child: ListView(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: ListView(
-                              children: [
-                                ..._buildQuizList(value.quizzes),
-                              ],
-                            ),
+                            children: [
+                              ..._buildQuizList(value.quizzes),
+                            ],
                           ),
                         ),
                       ],

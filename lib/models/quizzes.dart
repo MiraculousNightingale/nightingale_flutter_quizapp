@@ -13,8 +13,10 @@ class Quizzes with ChangeNotifier {
   Future<void> fetchAndSetQuizzes() async {
     final quizDocs = (await firebase.collection('quizzes').get()).docs;
     _quizzes.clear();
+    print("INITIALIZED THE FUTURE");
     for (final quizDoc in quizDocs) {
       _quizzes.add(Quiz.fromJson(quizDoc.id, quizDoc.data()));
     }
+    notifyListeners();
   }
 }

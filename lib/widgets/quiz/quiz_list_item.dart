@@ -12,36 +12,39 @@ class QuizListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(7),
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.purple[900],
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.7),
-              blurRadius: 5,
-            )
-          ]),
-      child: Row(
-        children: [
-          Expanded(child: TextH2(quiz.title)),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.edit,
+    return Dismissible(
+      key: ValueKey(quiz.id),
+      child: Container(
+        padding: const EdgeInsets.all(7),
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.purple[900],
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.7),
+                blurRadius: 5,
+              )
+            ]),
+        child: Row(
+          children: [
+            Expanded(child: TextH2(quiz.title)),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.edit,
+              ),
+              color: Colors.white,
             ),
-            color: Colors.white,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.play_arrow,
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.play_arrow,
+              ),
+              color: Colors.white,
             ),
-            color: Colors.white,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
