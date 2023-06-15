@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/assets.dart';
+import 'package:nightingale_flutter_quizapp/models/quiz.dart';
 import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
@@ -68,8 +69,12 @@ class HomeScreen extends StatelessWidget {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamed(QuizFormScreen.routeNameCreate);
+                  Navigator.of(context).pushNamed(
+                    QuizFormScreen.routeNameCreate,
+                    arguments: {
+                      'quiz': Quiz.empty(),
+                    },
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,

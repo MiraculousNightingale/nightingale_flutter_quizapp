@@ -3,6 +3,10 @@ import 'package:nightingale_flutter_quizapp/models/quiz_question.dart';
 
 class Quiz with ChangeNotifier {
   Quiz({required this.id, required this.title, required this.questions});
+  Quiz.empty()
+      : id = '',
+        title = '',
+        questions = [QuizQuestion.empty()];
 
   // JSON Keys
   static const keyTitle = 'title';
@@ -20,6 +24,6 @@ class Quiz with ChangeNotifier {
         questions = _questionsFromJsonArray(json[keyQuestions]);
 
   final String id;
-  final String title;
+  String title;
   final List<QuizQuestion> questions;
 }

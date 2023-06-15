@@ -5,15 +5,18 @@ class QuizTextField extends StatelessWidget {
     super.key,
     this.labelText,
     this.controller,
+    this.onChanged,
   });
 
   final String? labelText;
   final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      onChanged: onChanged,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(11),
         label: Text(labelText ?? ''),

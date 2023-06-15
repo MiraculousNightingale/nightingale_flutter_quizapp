@@ -1,10 +1,13 @@
 class QuizQuestion {
-  const QuizQuestion({required this.text, required this.answers});
+  QuizQuestion({required this.text, required this.answers});
+  QuizQuestion.empty()
+      : text = '',
+        answers = [for (var i = 0; i < 4; i++) ''];
   QuizQuestion.fromJson(Map<String, dynamic> json)
       : text = json['text'],
         answers = List.from(json['answers']);
 
-  final String text;
+  String text;
   final List<String> answers;
 
   List<String> get shuffledAnswers {
