@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/assets.dart';
 import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
+import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_list_screen.dart';
 import 'package:nightingale_flutter_quizapp/widgets/common/gradient_container.dart';
 import 'package:nightingale_flutter_quizapp/widgets/text/text_h_1.dart';
@@ -67,7 +68,8 @@ class HomeScreen extends StatelessWidget {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(QuizListScreen.routeName);
+                  Navigator.of(context)
+                      .pushNamed(QuizFormScreen.routeNameCreate);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,

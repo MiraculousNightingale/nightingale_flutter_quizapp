@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/firebase_options.dart';
 import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
-import 'package:nightingale_flutter_quizapp/routes.dart';
 import 'package:nightingale_flutter_quizapp/screens/home_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
+import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_list_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/results_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,14 +38,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
           primary: Colors.purple[800],
+          onSurface: Colors.white,
         ),
         useMaterial3: true,
       ),
       routes: {
         '/': (context) => const HomeScreen(),
+        QuizFormScreen.routeNameCreate: (context) => const QuizFormScreen(
+              isCreateMode: true,
+            ),
+        QuizFormScreen.routeNameUpdate: (context) => const QuizFormScreen(
+              isCreateMode: false,
+            ),
         QuizListScreen.routeName: (context) => const QuizListScreen(),
-        Routes.questionsRoute: (context) => const QuestionsScreen(),
-        Routes.resultsRoute: (context) => const ResultsScreen(),
+        QuestionsScreen.routeName: (context) => const QuestionsScreen(),
+        ResultsScreen.routeName: (context) => const ResultsScreen(),
       },
     );
   }
