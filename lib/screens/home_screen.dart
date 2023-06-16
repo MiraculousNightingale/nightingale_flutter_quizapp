@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/assets.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
-import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
+import 'package:nightingale_flutter_quizapp/providers/quizzes.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_list_screen.dart';

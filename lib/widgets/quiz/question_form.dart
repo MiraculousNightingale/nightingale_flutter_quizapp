@@ -52,6 +52,13 @@ class _QuestionFormState extends State<QuestionForm> {
     }
   }
 
+  void _goToPreviousQuestion() {
+    setState(() {
+      currentQuestionIndex--;
+      _setupTextController(currentQuestionIndex);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -83,7 +90,36 @@ class _QuestionFormState extends State<QuestionForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          TextH3('Question ${currentQuestionIndex + 1}'),
+          SizedBox(
+            height: 40,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextH3('Question ${currentQuestionIndex + 1}'),
+                    if (!isFirstQuestion)
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          if (isFirstQuestion) {
+                            questionTextController.clear();
+                            for (final controller in answerControllers) {
+                              controller.clear();
+                            }
+                          } else {
+                            widget.questions.removeAt(currentQuestionIndex);
+                            _goToPreviousQuestion();
+                          }
+                        },
+                        icon: const Icon(Icons.delete),
+                        label: Text(isFirstQuestion ? 'Clear' : 'Remove'),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           QuizTextField(
             controller: questionTextController,
             labelText: 'Question text',
@@ -95,23 +131,18 @@ class _QuestionFormState extends State<QuestionForm> {
             ),
           Row(
             children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    if (!isFirstQuestion) {
-                      setState(() {
-                        currentQuestionIndex--;
-                        _setupTextController(currentQuestionIndex);
-                      });
-                    }
-                  },
-                  icon: const Icon(Icons.arrow_left),
-                  label: const Text('Prev. question'),
+              if (!isFirstQuestion)
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: _goToPreviousQuestion,
+                    icon: const Icon(Icons.arrow_left),
+                    label: const Text('Prev. question'),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
+              if (!isFirstQuestion)
+                const SizedBox(
+                  width: 10,
+                ),
               Expanded(
                 child: isLastQuestion
                     ? ElevatedButton.icon(

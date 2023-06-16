@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
-import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
+import 'package:nightingale_flutter_quizapp/providers/quizzes.dart';
+import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
 import 'package:nightingale_flutter_quizapp/widgets/common/gradient_container.dart';
 import 'package:nightingale_flutter_quizapp/widgets/quiz/quiz_list_item.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,12 @@ class QuizListScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // push named quiz form
+              Navigator.of(context).pushNamed(
+                QuizFormScreen.routeNameCreate,
+                arguments: {
+                  'quiz': Quiz.empty(),
+                },
+              );
             },
             icon: const Icon(Icons.add),
           ),

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/firebase_options.dart';
-import 'package:nightingale_flutter_quizapp/models/quizzes.dart';
+import 'package:nightingale_flutter_quizapp/providers/quizzes.dart';
 import 'package:nightingale_flutter_quizapp/screens/home_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
 import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';

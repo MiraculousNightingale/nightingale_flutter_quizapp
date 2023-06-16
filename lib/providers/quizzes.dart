@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
 
 class Quizzes with ChangeNotifier {
-  final firebase = FirebaseFirestore.instance;
+  final _firebase = FirebaseFirestore.instance;
   final List<Quiz> _quizzes = [];
 
   List<Quiz> get quizzes {
@@ -11,12 +11,19 @@ class Quizzes with ChangeNotifier {
   }
 
   Future<void> fetchAndSetQuizzes() async {
-    final quizDocs = (await firebase.collection('quizzes').get()).docs;
+    final quizDocs = (await _firebase.collection('quizzes').get()).docs;
     _quizzes.clear();
-    print("INITIALIZED THE FUTURE");
     for (final quizDoc in quizDocs) {
       _quizzes.add(Quiz.fromJson(quizDoc.id, quizDoc.data()));
     }
     notifyListeners();
+  }
+
+  Future<void> createQuiz(Quiz quiz) async {
+    await _firebase.collection('quizzes').add(quiz.toJson());
+  }
+
+  Future<void> updateQuiz(Quiz quiz) async {
+    await _firebase.collection('quizzes').doc(quiz.id).set(quiz.toJson());
   }
 }

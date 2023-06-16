@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
 import 'package:nightingale_flutter_quizapp/screens/questions_screen.dart';
+import 'package:nightingale_flutter_quizapp/screens/quiz/quiz_form_screen.dart';
 import 'package:nightingale_flutter_quizapp/widgets/text/text_h_2.dart';
 
 class QuizListItem extends StatelessWidget {
@@ -31,7 +32,14 @@ class QuizListItem extends StatelessWidget {
           children: [
             Expanded(child: TextH2(quiz.title)),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  QuizFormScreen.routeNameUpdate,
+                  arguments: {
+                    'quiz': quiz,
+                  },
+                );
+              },
               icon: const Icon(
                 Icons.edit,
               ),
