@@ -21,6 +21,7 @@ class QuizListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz List'),
@@ -51,18 +52,21 @@ class QuizListScreen extends StatelessWidget {
               : RefreshIndicator(
                   onRefresh: () => _loadQuizzes(context),
                   child: Consumer<Quizzes>(
-                    builder: (context, value, child) => Column(
-                      children: [
-                        Expanded(
-                          child: ListView(
+                    builder: (context, value, child) => value.quizzes.isEmpty
+                        ? Center(
+                            child: Text(
+                              'You haven\'t created any quizzes yet.',
+                              style: theme.textTheme.titleMedium!.copyWith(
+                                color: theme.colorScheme.onPrimary,
+                              ),
+                            ),
+                          )
+                        : ListView(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             children: [
                               ..._buildQuizList(value.quizzes),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
         ),

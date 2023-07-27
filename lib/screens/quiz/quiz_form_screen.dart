@@ -20,6 +20,11 @@ class QuizFormScreen extends StatelessWidget {
         mediaQuery.viewPadding.top -
         mediaQuery.viewPadding.bottom;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Quiz Form'),
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 55, 14, 80),
+      ),
       body: GradientContainer(
         child: SafeArea(
           child: SingleChildScrollView(
@@ -27,7 +32,10 @@ class QuizFormScreen extends StatelessWidget {
               height: safeScreenHeight,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: QuizForm(quiz: quiz, isCreateMode: isCreateMode),
+                child: QuizForm(
+                  quiz: quiz,
+                  isCreateMode: isCreateMode,
+                ),
               ),
             ),
           ),

@@ -21,9 +21,17 @@ class Quizzes with ChangeNotifier {
 
   Future<void> createQuiz(Quiz quiz) async {
     await _firebase.collection('quizzes').add(quiz.toJson());
+    _quizzes.add(quiz);
   }
 
   Future<void> updateQuiz(Quiz quiz) async {
     await _firebase.collection('quizzes').doc(quiz.id).set(quiz.toJson());
+    final index = quizzes.indexWhere((element) => element.id == quiz.id);
+    _quizzes[index] = quiz;
+  }
+
+  Future<void> deleteQuiz(Quiz quiz) async {
+    await _firebase.collection('quizzes').doc(quiz.id).delete();
+    _quizzes.remove(quiz);
   }
 }

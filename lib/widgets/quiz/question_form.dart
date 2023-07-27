@@ -123,11 +123,15 @@ class _QuestionFormState extends State<QuestionForm> {
           QuizTextField(
             controller: questionTextController,
             labelText: 'Question text',
+            textInputAction: TextInputAction.next,
           ),
           for (var i = 0; i < answerControllers.length; i++)
             QuizTextField(
               controller: answerControllers[i],
               labelText: 'Answer ${i + 1}',
+              textInputAction: i < answerControllers.length - 1
+                  ? TextInputAction.next
+                  : TextInputAction.done,
             ),
           Row(
             children: [

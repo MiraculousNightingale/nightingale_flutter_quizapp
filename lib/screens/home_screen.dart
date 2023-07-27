@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final quizProvider = Provider.of<Quizzes>(context, listen: false);
     return Scaffold(
       body: GradientContainer(
@@ -36,6 +37,15 @@ class HomeScreen extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator(
                       color: Colors.white,
+                    );
+                  }
+                  if (quizProvider.quizzes.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'You haven\'t created any quizzes yet.',
+                        style: theme.textTheme.titleMedium!
+                            .copyWith(color: theme.colorScheme.onPrimary),
+                      ),
                     );
                   }
                   return ElevatedButton.icon(

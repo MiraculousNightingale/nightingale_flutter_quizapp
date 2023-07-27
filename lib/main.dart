@@ -42,6 +42,21 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      // Alternative to use route args as widget constructor params
+      // onGenerateRoute: (settings) {
+      //   final routes = <String, WidgetBuilder>{
+      //     QuizFormScreen.routeNameCreate: (context) => const QuizFormScreen(
+      //           isCreateMode: true,
+      //           //settings.arguments['quiz'],
+      //         ),
+      //   };
+      //   if (routes[settings.name] == null) {
+      //     throw 'onGenerateRoute - called with unexisting route name.';
+      //   }
+      //   return MaterialPageRoute(
+      //     builder: (context) => routes[settings.name]!(context),
+      //   );
+      // },
       routes: {
         '/': (context) => const HomeScreen(),
         QuizFormScreen.routeNameCreate: (context) => const QuizFormScreen(

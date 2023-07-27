@@ -6,11 +6,15 @@ class QuizTextField extends StatelessWidget {
     this.labelText,
     this.controller,
     this.onChanged,
+    this.onSubmitted,
+    this.textInputAction,
   });
 
   final String? labelText;
   final TextEditingController? controller;
   final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,8 @@ class QuizTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
+      onSubmitted: onSubmitted,
+      textInputAction: textInputAction,
     );
   }
 }
