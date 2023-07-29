@@ -8,6 +8,7 @@ class QuizTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.textInputAction,
+    this.focusNode,
   });
 
   final String? labelText;
@@ -15,6 +16,7 @@ class QuizTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final TextInputAction? textInputAction;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class QuizTextField extends StatelessWidget {
       ),
       onSubmitted: onSubmitted,
       textInputAction: textInputAction,
+      focusNode: focusNode,
     );
   }
 }

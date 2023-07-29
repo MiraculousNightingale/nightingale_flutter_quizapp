@@ -15,6 +15,7 @@ class _QuestionFormState extends State<QuestionForm> {
   var currentQuestionIndex = 0;
 
   TextEditingController questionTextController = TextEditingController();
+  FocusNode questionTextFocusNode = FocusNode();
   final List<TextEditingController> answerControllers = [
     for (var i = 0; i < 4; i++) TextEditingController()
   ];
@@ -124,6 +125,7 @@ class _QuestionFormState extends State<QuestionForm> {
             controller: questionTextController,
             labelText: 'Question text',
             textInputAction: TextInputAction.next,
+            focusNode: questionTextFocusNode,
           ),
           for (var i = 0; i < answerControllers.length; i++)
             QuizTextField(
@@ -156,6 +158,7 @@ class _QuestionFormState extends State<QuestionForm> {
                             currentQuestionIndex++;
                             _setupTextController(currentQuestionIndex);
                           });
+                          questionTextFocusNode.requestFocus();
                         },
                         icon: const Icon(Icons.plus_one),
                         label: const Text('Add question'),

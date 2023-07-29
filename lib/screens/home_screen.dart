@@ -31,40 +31,40 @@ class HomeScreen extends StatelessWidget {
                 width: 300,
               ),
               const TextH1('Nightingale\'s Flutter Quiz App'),
-              FutureBuilder(
-                future: quizProvider.fetchAndSetQuizzes(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator(
-                      color: Colors.white,
-                    );
-                  }
-                  if (quizProvider.quizzes.isEmpty) {
-                    return Center(
-                      child: Text(
-                        'You haven\'t created any quizzes yet.',
-                        style: theme.textTheme.titleMedium!
-                            .copyWith(color: theme.colorScheme.onPrimary),
-                      ),
-                    );
-                  }
-                  return ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(QuestionsScreen.routeName, arguments: {
-                        'quiz': quizProvider.quizzes.first,
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
-                      elevation: 9,
-                    ),
-                    icon: const Icon(Icons.arrow_right_alt),
-                    label: const TextH3('Start Quiz'),
-                  );
-                },
-              ),
+              // FutureBuilder(
+              //   future: quizProvider.fetchAndSetQuizzes(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.connectionState == ConnectionState.waiting) {
+              //       return const CircularProgressIndicator(
+              //         color: Colors.white,
+              //       );
+              //     }
+              //     if (quizProvider.quizzes.isEmpty) {
+              //       return Center(
+              //         child: Text(
+              //           'You haven\'t created any quizzes yet.',
+              //           style: theme.textTheme.titleMedium!
+              //               .copyWith(color: theme.colorScheme.onPrimary),
+              //         ),
+              //       );
+              //     }
+              //     return ElevatedButton.icon(
+              //       onPressed: () {
+              //         Navigator.of(context)
+              //             .pushNamed(QuestionsScreen.routeName, arguments: {
+              //           'quiz': quizProvider.quizzes.first,
+              //         });
+              //       },
+              //       style: ElevatedButton.styleFrom(
+              //         backgroundColor: Theme.of(context).colorScheme.primary,
+              //         foregroundColor: Colors.white,
+              //         elevation: 9,
+              //       ),
+              //       icon: const Icon(Icons.arrow_right_alt),
+              //       label: const TextH3('Start Quiz'),
+              //     );
+              //   },
+              // ),
               ElevatedButton.icon(
                 onPressed: () {
                   Navigator.of(context).pushNamed(QuizListScreen.routeName);
