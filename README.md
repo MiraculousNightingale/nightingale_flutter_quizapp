@@ -8,7 +8,33 @@ Firebase is used to store app data.
 
 ## Preview
 
- -> images/gifs go here <-
+### Creating a new quiz
+<details>
+
+![](https://github.com/MiraculousNightingale/nightingale_flutter_quizapp/blob/localstore/preview_gifs/creating_new_quiz.gif)
+ 
+</details>
+
+### Editing questions
+<details>
+
+![](https://github.com/MiraculousNightingale/nightingale_flutter_quizapp/blob/localstore/preview_gifs/editing_questions.gif)
+ 
+</details>
+
+### Quiz run-through
+<details>
+
+![](https://github.com/MiraculousNightingale/nightingale_flutter_quizapp/blob/localstore/preview_gifs/quiz_walkthrough.gif)
+ 
+</details>
+
+### Running a new quiz and deleting it
+<details>
+
+![](https://github.com/MiraculousNightingale/nightingale_flutter_quizapp/blob/localstore/preview_gifs/running_new_quiz_and_deleting.gif)
+ 
+</details>
 
 ## How to set-up and run the project
 
