@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:localstore/localstore.dart';
 import 'package:nightingale_flutter_quizapp/models/quiz.dart';
+import 'package:nightingale_flutter_quizapp/models/quiz_question.dart';
 
 class Quizzes with ChangeNotifier {
-  final _firebase = FirebaseFirestore.instance;
+  final _localstore = Localstore.instance;
   final List<Quiz> _quizzes = [];
 
   List<Quiz> get quizzes {
@@ -11,27 +12,104 @@ class Quizzes with ChangeNotifier {
   }
 
   Future<void> fetchAndSetQuizzes() async {
-    final quizDocs = (await _firebase.collection('quizzes').get()).docs;
-    _quizzes.clear();
-    for (final quizDoc in quizDocs) {
-      _quizzes.add(Quiz.fromJson(quizDoc.id, quizDoc.data()));
+    final expenseDocs = await _localstore.collection('quizzes').get();
+    if (expenseDocs != null) {
+      _quizzes.clear();
+      for (final doc in expenseDocs.entries) {
+        _quizzes.add(Quiz.fromJson(doc.key, doc.value));
+      }
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future<void> createQuiz(Quiz quiz) async {
-    await _firebase.collection('quizzes').add(quiz.toJson());
+    await _localstore.collection('quizzes').doc().set(quiz.toJson());
     _quizzes.add(quiz);
   }
 
   Future<void> updateQuiz(Quiz quiz) async {
-    await _firebase.collection('quizzes').doc(quiz.id).set(quiz.toJson());
+    await _localstore.collection('').doc(quiz.id).set(quiz.toJson());
     final index = quizzes.indexWhere((element) => element.id == quiz.id);
     _quizzes[index] = quiz;
   }
 
   Future<void> deleteQuiz(Quiz quiz) async {
-    await _firebase.collection('quizzes').doc(quiz.id).delete();
+    await _localstore.collection('quizzes').doc(quiz.id).delete();
     _quizzes.remove(quiz);
+  }
+
+  Future<void> addDefaultQuiz() async {
+    final defaultQuiz = Quiz(
+      id: '',
+      title: 'Flutter Quiz',
+      questions: [
+        QuizQuestion(
+          text: 'What are the main building blocks of Flutter UIs?',
+          answers: [
+            "Widgets",
+            "Components",
+            "Blocks",
+            "Functions",
+          ],
+        ),
+        QuizQuestion(
+          text: 'How are Flutter UIs built?',
+          answers: [
+            "By combining widgets in code",
+            "By combining widgets in a visual editor",
+            "By defining widgets in config files",
+            "By using XCode for iOS and Android Studio for Android",
+          ],
+        ),
+        QuizQuestion(
+          text: 'How are Flutter UIs built?',
+          answers: [
+            "By combining widgets in code",
+            "By combining widgets in a visual editor",
+            "By defining widgets in config files",
+            "By using XCode for iOS and Android Studio for Android",
+          ],
+        ),
+        QuizQuestion(
+          text: "What's the purpose of a StatefulWidget?",
+          answers: [
+            "Update UI as data changes",
+            "Update data as UI changes",
+            "Ignore data changes",
+            "Render UI that does not depend on data",
+          ],
+        ),
+        QuizQuestion(
+          text:
+              "Which widget should you try to use more often: StatelessWidget or StatefulWidget?",
+          answers: [
+            "StatelessWidget",
+            "StatefulWidget",
+            "Both are equally good",
+            "None of the above",
+          ],
+        ),
+        QuizQuestion(
+          text: "What happens if you change data in a StatelessWidget?",
+          answers: [
+            "The UI is not updated",
+            "The UI is updated",
+            "The closest StatefulWidget is updated",
+            "Any nested StatefulWidgets are updated",
+          ],
+        ),
+        QuizQuestion(
+          text: "How should you update data inside of StatefulWidgets?",
+          answers: [
+            "By calling setState()",
+            "By calling updateData()",
+            "By calling updateUI()",
+            "By calling updateState()",
+          ],
+        ),
+      ],
+    );
+    await _localstore.collection('quizzes').doc().set(defaultQuiz.toJson());
+    _quizzes.add(defaultQuiz);
   }
 }

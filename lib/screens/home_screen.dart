@@ -65,6 +65,18 @@ class HomeScreen extends StatelessWidget {
               //     );
               //   },
               // ),
+              // ElevatedButton.icon(
+              //   onPressed: () {
+              //     Provider.of<Quizzes>(context, listen: false).addDefaultQuiz();
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Theme.of(context).colorScheme.primary,
+              //     foregroundColor: Colors.white,
+              //     elevation: 9,
+              //   ),
+              //   icon: const Icon(Icons.list),
+              //   label: const TextH3('Add default quiz'),
+              // ),
               ElevatedButton.icon(
                 onPressed: () {
                   Navigator.of(context).pushNamed(QuizListScreen.routeName);
